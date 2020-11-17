@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/LifeMemberShipForm/static/css/main.a4f698eb.chunk.css",
-    "main.js": "/LifeMemberShipForm/static/js/main.4432bb98.chunk.js",
-    "main.js.map": "/LifeMemberShipForm/static/js/main.4432bb98.chunk.js.map",
-    "runtime-main.js": "/LifeMemberShipForm/static/js/runtime-main.a5cdfa0e.js",
-    "runtime-main.js.map": "/LifeMemberShipForm/static/js/runtime-main.a5cdfa0e.js.map",
-    "static/js/2.dad8e08b.chunk.js": "/LifeMemberShipForm/static/js/2.dad8e08b.chunk.js",
-    "static/js/2.dad8e08b.chunk.js.map": "/LifeMemberShipForm/static/js/2.dad8e08b.chunk.js.map",
-    "static/js/3.2f1b4fcb.chunk.js": "/LifeMemberShipForm/static/js/3.2f1b4fcb.chunk.js",
-    "static/js/3.2f1b4fcb.chunk.js.map": "/LifeMemberShipForm/static/js/3.2f1b4fcb.chunk.js.map",
-    "index.html": "/LifeMemberShipForm/index.html",
-    "static/css/main.a4f698eb.chunk.css.map": "/LifeMemberShipForm/static/css/main.a4f698eb.chunk.css.map",
-    "static/js/2.dad8e08b.chunk.js.LICENSE.txt": "/LifeMemberShipForm/static/js/2.dad8e08b.chunk.js.LICENSE.txt",
-    "static/media/avatar-placeholder.457c68df.png": "/LifeMemberShipForm/static/media/avatar-placeholder.457c68df.png",
-    "static/media/logo.103b5fa1.svg": "/LifeMemberShipForm/static/media/logo.103b5fa1.svg"
+    "main.css": "/LifeMembershipForm/static/css/main.a4f698eb.chunk.css",
+    "main.js": "/LifeMembershipForm/static/js/main.4432bb98.chunk.js",
+    "main.js.map": "/LifeMembershipForm/static/js/main.4432bb98.chunk.js.map",
+    "runtime-main.js": "/LifeMembershipForm/static/js/runtime-main.8b81e476.js",
+    "runtime-main.js.map": "/LifeMembershipForm/static/js/runtime-main.8b81e476.js.map",
+    "static/js/2.dad8e08b.chunk.js": "/LifeMembershipForm/static/js/2.dad8e08b.chunk.js",
+    "static/js/2.dad8e08b.chunk.js.map": "/LifeMembershipForm/static/js/2.dad8e08b.chunk.js.map",
+    "static/js/3.2f1b4fcb.chunk.js": "/LifeMembershipForm/static/js/3.2f1b4fcb.chunk.js",
+    "static/js/3.2f1b4fcb.chunk.js.map": "/LifeMembershipForm/static/js/3.2f1b4fcb.chunk.js.map",
+    "index.html": "/LifeMembershipForm/index.html",
+    "static/css/main.a4f698eb.chunk.css.map": "/LifeMembershipForm/static/css/main.a4f698eb.chunk.css.map",
+    "static/js/2.dad8e08b.chunk.js.LICENSE.txt": "/LifeMembershipForm/static/js/2.dad8e08b.chunk.js.LICENSE.txt",
+    "static/media/avatar-placeholder.457c68df.png": "/LifeMembershipForm/static/media/avatar-placeholder.457c68df.png",
+    "static/media/logo.103b5fa1.svg": "/LifeMembershipForm/static/media/logo.103b5fa1.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.a5cdfa0e.js",
+    "static/js/runtime-main.8b81e476.js",
     "static/js/2.dad8e08b.chunk.js",
     "static/css/main.a4f698eb.chunk.css",
     "static/js/main.4432bb98.chunk.js"
