@@ -33,12 +33,54 @@ class LifeMemberShipForm extends React.Component {
   }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+
+
     console.log(this.state);
   }
   handleSubmit(e) {
     e.preventDefault();
+    const { altNum }= this.state.altNum;
+    if(altNum=="")
+    {
+      document.getElementById("messages").innerHTML="**PLEASE FILL MOBILE NO.";
+      return false;
+    }
+    if(isNaN(altNum))
+    {
+      document.getElementById("messages").innerHTML="**ENTER NUMERIC VALUES ONLY";
+      return false;
+    }
+    if(altNum.length<10)
+    {
+      document.getElementById("messages").innerHTML="**MOBILE NO. MUST HABE 10 DIGITS ONLY";
+      return false;
+    }
     
+    if(altNum.length>10)
+    {
+      document.getElementById("messages").innerHTML="**MOBILE NO. MUST HAVE 10 DIGITS ONLY";
+      return false;
+    }
     
+
+    const { firstName }= this.state.firstName;
+    const { middleName }= this.state.middleName;
+    const { lastName }= this.state.lastName;
+    if(!isNaN(firstName))
+    {
+      document.getElementById("messages").innerHTML="**ENTER CHARACTER VALUES ONLY";
+      return false;
+    }
+    if(!isNaN(middleName))
+    {
+      document.getElementById("messages").innerHTML="**ENTER CHARACTER VALUES ONLY";
+      return false;
+    }
+    if(!isNaN(lastName))
+    {
+      document.getElementById("messages").innerHTML="**ENTER CHARACTER VALUES ONLY";
+      return false;
+    }
     console.log(this.state);
   }
   render() {
@@ -68,9 +110,11 @@ class LifeMemberShipForm extends React.Component {
               onChange={this.handleChange}
                 class="form-control"
                 type="text"
-                placeholder="First Name"
+                placeholder=" "
+                
                 required
               ></input>
+              <span>First Name</span>
             </div>
             <div class="col-sm-2">
               <input
@@ -78,9 +122,10 @@ class LifeMemberShipForm extends React.Component {
               onChange={this.handleChange}
                 class="form-control"
                 type="text"
-                placeholder="Middle Name"
+                placeholder=" "
                 required
               ></input>
+              <span>Middle Name</span>
             </div>
             <div class="col-sm-2">
               <input
@@ -88,9 +133,10 @@ class LifeMemberShipForm extends React.Component {
               onChange={this.handleChange}
                 class="form-control"
                 type="text"
-                placeholder="Last Name"
+                placeholder=" "
                 required
               ></input>
+              <span>Last Name</span>
             </div>
             <div class="col-sm-1">
               <select class="custom-select " id="inlineFormCustomSelectPref" name="gender"   onChange={this.handleChange}>
@@ -105,6 +151,7 @@ class LifeMemberShipForm extends React.Component {
             </div>
             <div className="col-sm-2">
               <input type="date" name="dob"   onChange={this.handleChange} className="form-control" placeholder=" " />
+              <span>Date of birth</span>
             </div>
             <div className="col-sm-1">
               <select className="custom-select " id="inlineFormCustomSelectPref" name="bloodGroup"   onChange={this.handleChange}>
@@ -126,12 +173,15 @@ class LifeMemberShipForm extends React.Component {
                 name="altNum"
                 onChange={this.handleChange}
                 class="form-control"
-                type="number"
-                placeholder="Alternate Number"
+                type="text"
+                id="mobilenum"
+                placeholder=" "
                 min="0"
                 pattern="\d{10}"
                 required
               ></input>
+              <span>Alternate Number</span>
+              <span id="messages"></span>
             </div>
           </div>
           <div class="form-row">
@@ -141,10 +191,11 @@ class LifeMemberShipForm extends React.Component {
                 name="resAdd"
                 onChange={this.handleChange}
                 id="exampleFormControlTextarea1"
-                placeholder="Residential Address"
+                placeholder=" "
                 rows="3"
                 required
               ></textarea>
+               <span>Residential Address</span>
             </div>
             <div className="col-sm-2">
               <input
@@ -152,9 +203,10 @@ class LifeMemberShipForm extends React.Component {
                 type="number"
                 min="0"
                 pattern="\d{10}"
-                placeholder="Alternate Number"
+                placeholder=" "
                 required
               ></input>
+                 <span>Alternate Number</span>
             </div>
           </div>
 
@@ -168,29 +220,32 @@ class LifeMemberShipForm extends React.Component {
                 name="acadQual"
                 onChange={this.handleChange}
                 class="form-control form-control-sm"
-                placeholder="Academic Qualification"
+                placeholder=" "
                 required
               ></input>
+                 <span>Academic Qualification</span>
             </div>
             <div class="col-sm-5">
               <input
                 type="text"
                 name="examBody"
                 class="form-control form-control-sm"
-                placeholder="Examining Body"
+                placeholder=" "
                 onChange={this.handleChange}
                 required
               ></input>
+                 <span>Examining Body</span>
             </div>
             <div class="col-sm-2">
               <input
                 type="text"
                 name="yearPass"
                 class="form-control form-control-sm"
-                placeholder="Year of Passing"
+                placeholder=" "
                 onChange={this.handleChange}
                 required
               ></input>
+                <span>Year of Passing</span>
             </div>
           </div>
 
@@ -203,32 +258,36 @@ class LifeMemberShipForm extends React.Component {
                 type="text"
                 name="regNum"
                 class="form-control form-control-sm"
-                placeholder="Registration Number"
+                placeholder=" "
                 onChange={this.handleChange}
                 required
               ></input>
+              <span>Registration Number</span>
             </div>
             <div class="col-sm-2">
               <input
                 type="text"
                 name="dateReg"
                 class="form-control form-control-sm"
-                placeholder="Date of Registration"
+                placeholder=" "
                 onChange={this.handleChange}
                 required
               ></input>
+              <span>Date of Registration</span>
             </div>
             <div class="col-sm-5">
               <input
                 type="text"
                 name="nameofBoard"
                 class="form-control form-control-sm"
-                placeholder="Name of the Board/Council of Registration"
+                placeholder=" "
                 onChange={this.handleChange}
                 required
               >
+
                 {/* </input> */}
               </input>
+              <span>Name of the Board/Council of Registration</span>
             </div>
             <br />
           </div>
@@ -244,6 +303,7 @@ class LifeMemberShipForm extends React.Component {
                 <option value="a">A</option>
                 <option value="b">B</option>
               </select>
+
             </div>
             
                      </div>
@@ -265,10 +325,11 @@ class LifeMemberShipForm extends React.Component {
                 type="text"
                 name="titleofPaper"
                 class="form-control form-control-sm"
-                placeholder="Title of Paper"
+                placeholder=" "
                 onChange={this.handleChange}
                 required
               ></input>
+              <span>Title of Paper</span>
             </div>
             <button
               type="button"
@@ -303,12 +364,13 @@ class LifeMemberShipForm extends React.Component {
               <textarea
                 class="form-control"
                 name="reasonDiscontinue"
-                placeholder="Reason for Discontinue"
+                placeholder=" "
                 onChange={this.handleChange}
                 rows="2"
                 id="comment"
                 required
               ></textarea>
+              <span>Reason for Discontinue</span>
             </div>
           </div>
 

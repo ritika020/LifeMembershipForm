@@ -1,3 +1,46 @@
+.form-control{
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #CADEEF;
+  border-radius: .50rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+span{
+  padding: .375rem 1rem;
+  pointer-events: none;
+  position: absolute;
+  top:0;
+  left:0;
+  line-height: 1.5;
+  font-size: 1rem;
+  color: #495057;
+  transition: 0.2s;
+  transition-timing-function: ease;
+  transition-timing-function: cubic-bezier(0.25,0.1,0.25,1);
+  opacity:0.8;
+}
+input:focus + span, input:not(:placeholder-shown)+ span{
+  opacity:1;
+  transform: scale(0.75) translateY(-80%) translateX(-18px);
+  background-color: white;
+  color: #495057;
+  padding: .175rem 0.5rem;
+}
+textarea:focus + span, textarea:not(:placeholder-shown) + span {
+  opacity:1;
+  transform: scale(0.8) translateY(-80%) translateX(-1px);
+  background-color: white;
+  color: #495057;
+  padding: .175rem 0.5rem;
+}
+
+
 .Forms_avatar {
   vertical-align: middle;
   width: 90%;
