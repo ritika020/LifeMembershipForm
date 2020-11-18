@@ -36,6 +36,59 @@ class LifeMemberShipForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  addNew = (event) => {
+    /*
+              <div className="form-row">
+            <div className="col-sm-2">
+              <select
+                className="custom-select "
+                id="inlineFormCustomSelectPref"
+                name="scientificPub"
+                required
+                onChange={this.handleChange}
+              >
+                <option value="" disabled selected>
+                  Scientific Papers Published
+                </option>
+                <option value="y">Yes</option>
+                <option value="n">No</option>
+              </select>
+            </div>
+
+            <div className="col-sm-5">
+              <input
+                type="text"
+                name="titleofPaper"
+                className="form-control form-control-sm"
+                placeholder=" "
+                onChange={this.handleChange}
+                required
+              ></input>
+              <span>Title of Paper</span>
+            </div>
+            <button
+              type="button"
+              className="btn btn-link"
+              style={{ color: "black" }}
+              onClick={this.addNew}
+            >
+              + Add Another
+            </button>
+          </div>
+          */
+    event.preventDefault();
+    // var iDiv = document.createElement("div");
+    // iDiv.id = "block";
+    var inputPaper = document.createElement("input");
+    inputPaper.type = "text";
+    inputPaper.name = "titleofPaper";
+    inputPaper.className = "form-control form-control-sm";
+    inputPaper.placeholder = " ";
+    inputPaper.onChange = `${this.handleChange}`;
+
+    // iDiv.appendChild(inputPaper);
+    document.getElementById("addNewPaper").appendChild(inputPaper);
+  };
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
     if (e.target.name === "professionalStatus") {
