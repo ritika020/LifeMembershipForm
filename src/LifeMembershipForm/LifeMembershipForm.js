@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Fragment } from 'react';
 import "./LifeMembershipForm.css";
 import avatar from "../avatar-placeholder.png";
 class LifeMemberShipForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      data : {
       firstName: "",
       middleName: "",
       lastName: "",
@@ -26,12 +27,46 @@ class LifeMemberShipForm extends React.Component {
       nimaBefore: null,
       branch: null,
       reasonDiscontinue: "",
-    };
+    },
+    practitioner: false,
+    medicalEducationTeacher: false,
+    inService: false,
+    researchWorker:false,
+  };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+    if (e.target.name === "professionalStatus") {
+      if (e.target.value === "practitioner") {
+        this.setState({ practitioner: true });
+        this.setState({ medicalEducationTeacher: false });
+        this.setState({ inService: false });
+        this.setState({ researchWorker: false });
+      }
+   
+    else  if (e.target.value === "medicalEducationTeacher") {
+        this.setState({ practitioner: false });
+        this.setState({ medicalEducationTeacher: true });
+        this.setState({ inService: false });
+        this.setState({ researchWorker: false });
+      
+    }
+   else  if (e.target.value === "inService") {
+        this.setState({ practitioner: false });
+        this.setState({ medicalEducationTeacher: false });
+        this.setState({ inService: true });
+        this.setState({ researchWorker: false });
+      
+    }
+   else if (e.target.value === "researchWorker") {
+        this.setState({ practitioner: false });
+        this.setState({ medicalEducationTeacher: false });
+        this.setState({ inService: false });
+        this.setState({ researchWorker: true });
+      }
+    }
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -58,7 +93,7 @@ class LifeMemberShipForm extends React.Component {
       nimaBefore,
       branch,
       reasonDiscontinue,
-    } = this.state;
+    } = this.state.data;
     if (!isNaN(firstName)) {
       alert("Firstname contains number");
     }
@@ -112,7 +147,7 @@ class LifeMemberShipForm extends React.Component {
               ></input>
               <span>First Name</span>
             </div>
-            <div className="col-sm-2">
+            <div className="col-md-2 col-6">
               <input
                 name="middleName"
                 onChange={this.handleChange}
@@ -123,7 +158,7 @@ class LifeMemberShipForm extends React.Component {
               ></input>
               <span>Middle Name</span>
             </div>
-            <div className="col-sm-2">
+            <div className="col-md-2 col-6">
               <input
                 name="lastName"
                 onChange={this.handleChange}
@@ -134,7 +169,7 @@ class LifeMemberShipForm extends React.Component {
               ></input>
               <span>Last Name</span>
             </div>
-            <div className="col-sm-1">
+            <div className="col-md-1">
               <select
                 className="custom-select "
                 id="inlineFormCustomSelectPref"
@@ -150,7 +185,7 @@ class LifeMemberShipForm extends React.Component {
                 <option value="o">Others</option>
               </select>
             </div>
-            <div className="col-sm-2 mt-2 mt-md-0">
+            <div className="col-md-2 mt-2 mt-md-0">
               <input
                 required
                 type="date"
@@ -182,7 +217,7 @@ class LifeMemberShipForm extends React.Component {
                 <option value="o">O-</option>
               </select>
             </div>
-            <div className="col-sm-2">
+            <div className="col-md-2">
               <input
                 name="altNum"
                 onChange={this.handleChange}
@@ -197,7 +232,7 @@ class LifeMemberShipForm extends React.Component {
             </div>
           </div>
           <div className="form-row">
-            <div className="col-sm-10">
+            <div className="col-md-10">
               <textarea
                 className="form-control"
                 name="resAdd"
@@ -209,7 +244,7 @@ class LifeMemberShipForm extends React.Component {
               ></textarea>
               <span>Residential Address</span>
             </div>
-            <div className="col-sm-2">
+            <div className="col-md-2">
               <input
                 name="altNum1"
                 onChange={this.handleChange}
@@ -227,7 +262,7 @@ class LifeMemberShipForm extends React.Component {
           <h5 className="Forms_titleText">Qualification Details</h5>
           <br />
           <div className="form-row">
-            <div className="col-sm-5">
+            <div className="col-md-5">
               <input
                 type="text"
                 name="acadQual"
@@ -238,7 +273,7 @@ class LifeMemberShipForm extends React.Component {
               ></input>
               <span>Academic Qualification</span>
             </div>
-            <div className="col-sm-5">
+            <div className="col-md-5">
               <input
                 type="text"
                 name="examBody"
@@ -249,7 +284,7 @@ class LifeMemberShipForm extends React.Component {
               ></input>
               <span>Examining Body</span>
             </div>
-            <div className="col-sm-2">
+            <div className="col-md-2">
               <input
                 type="number"
                 name="yearPass"
@@ -267,7 +302,7 @@ class LifeMemberShipForm extends React.Component {
           <h5 className="Forms_titleText">Membership Details</h5>
           <br />
           <div className="form-row">
-            <div className="col-sm-2">
+            <div className="col-md-2">
               <input
                 type="text"
                 name="regNum"
@@ -278,7 +313,7 @@ class LifeMemberShipForm extends React.Component {
               ></input>
               <span>Registration Number</span>
             </div>
-            <div className="col-sm-2  mt-2 mt-md-0">
+            <div className="col-md-2  mt-2 mt-md-0">
               <input
                 type="date"
                 name="dateReg"
@@ -289,7 +324,7 @@ class LifeMemberShipForm extends React.Component {
               />
               <span>Date Of Registration</span>
             </div>
-            <div className="col-sm-5">
+            <div className="col-md-5">
               <input
                 type="text"
                 name="nameofBoard"
@@ -308,26 +343,134 @@ class LifeMemberShipForm extends React.Component {
           <h5 className="Forms_titleText">Professional Status</h5>
           <br />
           <div className="form-row">
-            <div className="col-sm-2">
+            <div className="col-md-2">
               <select
                 className="custom-select "
                 id="inlineFormCustomSelectPref"
-                name="practitioner"
+                name="professionalStatus"
                 required
                 onChange={this.handleChange}
               >
-                <option value="" disabled selected>
-                  Practitioner
+            <option value="" disabled selected>
+                  Professional Status
                 </option>
-                <option value="a">A</option>
-                <option value="b">B</option>
+                <option value="practitioner">Practitioner</option>
+                <option value="medicalEducationTeacher">Medical Education Teacher</option>
+                <option value="inService">In Service</option>
+                <option value="researchWorker">Research Worker</option>
               </select>
             </div>
-          </div>
+            {this.state.practitioner && (
+              <Fragment>
+                <div className="col-md-2 col-12">
+                  <input
+                    name="hospitalAttached"
+                    onChange={this.handleChange}
+                    className="form-control"
+                    type="text"
+                    placeholder=" "
+                    required
+                  ></input>
+                  <span>Hospital Attached</span>
+                </div>
+                <div className="col-md-2">
+                  <input
+                    name="inWhatCapacity"
+                    onChange={this.handleChange}
+                    className="form-control"
+                    type="text"
+                    placeholder=" "
+                    required
+                  ></input>
+                  <span>In What Capacity</span>
+                </div>
+              </Fragment>
+            )}
+
+            {this.state.medicalEducationTeacher && (
+              <Fragment>
+                <div className="col-md-5 col-12">
+                  <input
+                    name="nameOfInstitution"
+                    onChange={this.handleChange}
+                    className="form-control"
+                    type="text"
+                    placeholder=" "
+                    required
+                  ></input>
+                  <span>Name of the Institution</span>
+                </div>
+                <div className="col-md-2">
+                  <input
+                    name="designation0"
+                    onChange={this.handleChange}
+                    className="form-control"
+                    type="text"
+                    placeholder=" "
+                    required
+                  ></input>
+                  <span>Designation</span>
+                </div>
+              </Fragment>
+            )}
+            {this.state.inService && (
+              <Fragment>
+                <div className="col-md-2 col-12">
+                  <input
+                    name="designation1"
+                    onChange={this.handleChange}
+                    className="form-control"
+                    type="text"
+                    placeholder=" "
+                    required
+                  ></input>
+                  <span>Designation</span>
+                </div>
+                <div className="col-md-2">
+                  <input
+                    name="nameOfEmployee"
+                    onChange={this.handleChange}
+                    className="form-control"
+                    type="text"
+                    placeholder=" "
+
+                    required
+                  ></input>
+                  <span>Name of the Employee</span>
+                </div>
+              </Fragment>
+            )}
+            {this.state.researchWorker && (
+              <Fragment>
+                <div className="col-md-2 col-12">
+                  <input
+                    name="designation2"
+                    onChange={this.handleChange}
+                    className="form-control"
+                    type="text"
+                    placeholder=" "
+                    required
+                  ></input>
+                  <span>Designation</span>
+                </div>
+                <div className="col-md-5">
+                  <input
+                    name="nameOfInstitution"
+                    onChange={this.handleChange}
+                    className="form-control"
+                    type="text"
+                    placeholder=" "
+                    required
+                  ></input>
+                  <span>Name of the Institution</span>
+                </div>
+              </Fragment>
+            )}
+            </div>
 
           <br />
           <div className="form-row">
-            <div className="col-sm-2">
+            <div className="col-md-2">
               <select
                 className="custom-select "
                 id="inlineFormCustomSelectPref"
@@ -343,7 +486,7 @@ class LifeMemberShipForm extends React.Component {
               </select>
             </div>
 
-            <div className="col-sm-5">
+            <div className="col-md-5">
               <input
                 type="text"
                 name="titleofPaper"
@@ -364,7 +507,7 @@ class LifeMemberShipForm extends React.Component {
           </div>
           <br />
           <div className="form-row">
-            <div className="col-sm-2">
+            <div className="col-md-2">
               <select
                 className="custom-select "
                 id="inlineFormCustomSelectPref"
@@ -379,7 +522,7 @@ class LifeMemberShipForm extends React.Component {
                 <option value="n">No</option>
               </select>
             </div>
-            <div className="col-sm-2">
+            <div className="col-md-2">
               <select
                 className="custom-select "
                 id="inlineFormCustomSelectPref"
@@ -395,7 +538,7 @@ class LifeMemberShipForm extends React.Component {
               </select>
             </div>
 
-            <div className="col-sm-5">
+            <div className="col-md-5">
               <textarea
                 className="form-control"
                 name="reasonDiscontinue"
