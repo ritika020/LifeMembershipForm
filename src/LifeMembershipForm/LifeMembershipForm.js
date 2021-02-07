@@ -1,5 +1,10 @@
 import React, { Fragment } from "react";
 import "./LifeMembershipForm.css";
+
+import RaisedButton from "material-ui/RaisedButton";
+import Recaptcha from 'react-google-invisible-recaptcha';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 import avatar from "../avatar-placeholder.png";
 class LifeMemberShipForm extends React.Component {
   constructor(props) {
@@ -27,6 +32,8 @@ class LifeMemberShipForm extends React.Component {
         nimaBefore: null,
         branch: null,
         reasonDiscontinue: "",
+        message:"",
+        messageSent: false
       },
       practitioner: false,
       medicalEducationTeacher: false,
@@ -72,6 +79,13 @@ class LifeMemberShipForm extends React.Component {
       }
     }
   }
+  sendMessage=()=>{
+    this.recaptcha.execute();
+  }
+  onResolved=()=>{
+    this.setState({messageSent: true});
+    console.log(this.state)
+  }
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state);
@@ -111,6 +125,8 @@ class LifeMemberShipForm extends React.Component {
   }
   render() {
     return (
+      <MuiThemeProvider>
+
       <div className="Forms_first mr-5 ml-5">
         <div className="Forms_pic mb-1">
           <div className="form-row mt-4">
@@ -565,8 +581,20 @@ class LifeMemberShipForm extends React.Component {
               </div>
             </div>
           </div>
+          <RaisedButton
+            label="Send"
+            style={StyleSheet.button}
+            onClick={this.sendMessage}
+            />
+            <Recaptcha
+              ref={ref=>this.recaptcha=ref}
+              sitekey="6LdV_00aAAAAAOhy0wsKIR1yCyOcOWK-7-X0J0zQ"
+              onResolved={this.onResolved}
+              />
         </form>
       </div>
+            </MuiThemeProvider>
+
     );
   }
 }
