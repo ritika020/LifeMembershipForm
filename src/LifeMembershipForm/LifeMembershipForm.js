@@ -6,6 +6,8 @@ import Recaptcha from 'react-google-invisible-recaptcha';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import avatar from "../avatar-placeholder.png";
+import { sendLifemembershipForm } from "../lifeform/lifeform";
+
 class LifeMemberShipForm extends React.Component {
   constructor(props) {
     super(props);
@@ -15,28 +17,28 @@ class LifeMemberShipForm extends React.Component {
         middleName: "",
         lastName: "",
         gender: null,
-        dob: "",
+        dateOfBirth: "",
         bloodGroup: null,
-        altNum: "",
-        altNum1: "",
-        resAdd: "",
-        acadQual: "",
-        examBody: "",
-        yearPass: "",
-        regNum: "",
-        dateReg: "",
+        contactNo: "",
+        alternateNumber: "",
+        address: "",
+        qualification: "",
+        examiningBody: "",
+        yearOfPassing: "",
+        registrationNumber: "",
+        dateOfRegistration: "",
         nameofBoard: "",
         practitioner: null,
-        scientificPub: null,
+        paperPublished: null,
         titleofPaper: "",
-        nimaBefore: null,
+        nimaMemberBefore: null,
         branch: null,
-        reasonDiscontinue: "",
+        reasonForDiscontinue: "",
         message:"",
         messageSent: false
       },
       practitioner: false,
-      medicalEducationTeacher: false,
+      medicalEduTeacher: false,
       inService: false,
       researchWorker: false,
     };
@@ -87,6 +89,30 @@ class LifeMemberShipForm extends React.Component {
     console.log(this.state)
   }
   handleSubmit(e) {
+    e.preventDefault();
+    var formData = new FormData(e.target);
+    const data = {};
+    data["firstName"] = formData.get("firstName") || this.state.firstName;
+    data["middleName"] = formData.get("middleName") || this.state.middleName;
+    data["lastName"] = formData.get("lastName") || this.state.lastName;
+    data["gender"] = formData.get("gender") || this.state.gender;
+    data["DateOfBirth"] = formData.get("dateOfBirth") || this.state.dateOfBirth;
+    data["bloodGroup"] = formData.get("bloodGroup") || this.state.bloodGroup;
+    data["contactNo"] = formData.get("contactNo") || this.state.contactNo;
+    data["alternateNumber"] = formData.get("alternateNumber") || this.state.alternateNumber;
+    data["address"] = formData.get("address") || this.state.address;
+    data["qualification"] = formData.get("qualification") || this.state.qualification;
+    data["examiningBody"] = formData.get("examiningBody") || this.state.examiningBody;
+    data["yearOfPassing"] = formData.get("yearOfPassing") || this.state.yearOfPassing;
+    data["registrationNumber"] = formData.get("registrationNumber") || this.state.registrationNumber;
+    data["dateOfRegistration"] = formData.get("dateOfRegistration") || this.state.dateOfRegistration;
+    data["nameOfBoard"] = formData.get("nameOfBoard") || this.state.nameOfBoard;
+    data["professionalStatus"] = formData.get("professionalStatus") || this.state.professionalStatus;
+    data["paperPublished"] = formData.get("paperPublished") || this.state.paperPublished;
+
+    console.log(data);
+    sendLifemembershipForm(data);
+ 
     e.preventDefault();
     console.log(this.state);
     const {
@@ -199,7 +225,7 @@ class LifeMemberShipForm extends React.Component {
               <input
                 required
                 type="date"
-                name="dob"
+                name="dateOfBirth"
                 onChange={this.handleChange}
                 className="form-control"
                 placeholder=" "
@@ -229,7 +255,7 @@ class LifeMemberShipForm extends React.Component {
             </div>
             <div className="col-md-2 col-12">
               <input
-                name="altNum"
+                name="contactNo"
                 onChange={this.handleChange}
                 className="form-control"
                 type="text"
@@ -245,7 +271,7 @@ class LifeMemberShipForm extends React.Component {
             <div className="col-md-10 col-12">
               <textarea
                 className="form-control"
-                name="resAdd"
+                name="address"
                 onChange={this.handleChange}
                 id="exampleFormControlTextarea1"
                 placeholder=" "
@@ -256,7 +282,7 @@ class LifeMemberShipForm extends React.Component {
             </div>
             <div className="col-md-2 col-12">
               <input
-                name="altNum1"
+                name="alternateNumber"
                 onChange={this.handleChange}
                 className="form-control"
                 type="number"
@@ -275,7 +301,7 @@ class LifeMemberShipForm extends React.Component {
             <div className="col-md-5 col-12">
               <input
                 type="text"
-                name="acadQual"
+                name="qualification"
                 onChange={this.handleChange}
                 className="form-control form-control-sm"
                 placeholder=" "
@@ -286,7 +312,7 @@ class LifeMemberShipForm extends React.Component {
             <div className="col-md-5 col-12">
               <input
                 type="text"
-                name="examBody"
+                name="examiningBody"
                 className="form-control form-control-sm"
                 placeholder=" "
                 onChange={this.handleChange}
@@ -297,7 +323,7 @@ class LifeMemberShipForm extends React.Component {
             <div className="col-md-2 col-12">
               <input
                 type="number"
-                name="yearPass"
+                name="yearOfPassing"
                 className="form-control form-control-sm"
                 placeholder=" "
                 onChange={this.handleChange}
@@ -315,7 +341,7 @@ class LifeMemberShipForm extends React.Component {
             <div className="col-md-2 col-12">
               <input
                 type="text"
-                name="regNum"
+                name="registrationNumber"
                 className="form-control form-control-sm"
                 placeholder=" "
                 onChange={this.handleChange}
@@ -326,7 +352,7 @@ class LifeMemberShipForm extends React.Component {
             <div className="col-md-2 col-12 mt-2 mt-md-0">
               <input
                 type="date"
-                name="dateReg"
+                name="dateOfRegistration"
                 onChange={this.handleChange}
                 className="form-control"
                 placeholder=" "
@@ -366,7 +392,7 @@ class LifeMemberShipForm extends React.Component {
                   Professional Status
                 </option>
                 <option value="practitioner">Practitioner</option>
-                <option value="medicalEducationTeacher">
+                <option value="medicalEduTeacher">
                   Medical Education Teacher
                 </option>
                 <option value="inService">In Service</option>
@@ -485,7 +511,7 @@ class LifeMemberShipForm extends React.Component {
               <select
                 className="custom-select Form__select"
                 id="inlineFormCustomSelectPref"
-                name="scientificPub"
+                name="paperPublished"
                 required
                 onChange={this.handleChange}
               >
@@ -500,7 +526,7 @@ class LifeMemberShipForm extends React.Component {
             <div className="col-md-5 col-12">
               <input
                 type="text"
-                name="titleofPaper"
+                name="titleOfPaper"
                 className="form-control form-control-sm"
                 placeholder=" "
                 onChange={this.handleChange}
@@ -527,7 +553,7 @@ class LifeMemberShipForm extends React.Component {
               <select
                 className="custom-select Form__select"
                 id="inlineFormCustomSelectPref"
-                name="nimaBefore"
+                name="nimaMemberBefore"
                 onChange={this.handleChange}
                 required
               >
@@ -557,7 +583,7 @@ class LifeMemberShipForm extends React.Component {
             <div className="col-md-5 col-12">
               <textarea
                 className="form-control"
-                name="reasonDiscontinue"
+                name="reasonForDiscontinue"
                 placeholder=" "
                 onChange={this.handleChange}
                 rows="2"
