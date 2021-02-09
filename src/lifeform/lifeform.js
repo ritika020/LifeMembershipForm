@@ -3,11 +3,11 @@ import axios from "axios";
 export const sendLifemembershipForm = async (data) => {
   console.log(data);
   return await axios
-    .post("https://nimaaaa-project.herokuapp.com/LifeMembership", data,{
-        headers: {
-            'accept': 'application/json',
-            'Content-Type': 'multipart/form-data'
-          }
+    .post("https://nimaaaa-project.herokuapp.com/LifeMembership", data, {
+      headers: {
+        accept: "application/json",
+        "Content-Type": "multipart/form-data",
+      },
     })
     .then((response) => {
       console.log(response);
@@ -18,7 +18,6 @@ export const sendLifemembershipForm = async (data) => {
       return null;
     });
 };
-
 
 // firstName : {
 //     type : String
@@ -69,7 +68,7 @@ export const sendLifemembershipForm = async (data) => {
 //     type : String
 // },
 // nameOfBoard : {
-//     type : String 
+//     type : String
 // },
 // professionalStatus : {
 //     practitioner : {
@@ -85,7 +84,7 @@ export const sendLifemembershipForm = async (data) => {
 //             type : String
 //         },
 //         designation : {
-//             type : String 
+//             type : String
 //         }
 //     },
 //     inService : {
