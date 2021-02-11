@@ -7,7 +7,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 import avatar from "../avatar-placeholder.png";
 import { sendLifemembershipForm } from "../lifeform/lifeform";
-
+import { MdCancel } from "react-icons/md";
 class LifeMemberShipForm extends React.Component {
   constructor(props) {
     super(props);
@@ -63,19 +63,62 @@ class LifeMemberShipForm extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleTitlePaper = this.handleTitlePaper.bind(this);
   }
   addNew = (event) => {
     event.preventDefault();
-    let index = this.state.count;
     this.setState({ count: this.state.count + 1 });
+
+    var divPaper = document.createElement("div");
+    divPaper.id = `Div${this.state.count}`;
+    divPaper.className = "row ml-2";
+    var removePaper = document.createElement("button");
+    removePaper.className = "col-1 ml-2";
+    removePaper.text = <MdCancel />;
+    removePaper.type = "button";
+    // removePaper;
+    removePaper.onclick = (e) => {
+      e.preventDefault();
+      let a = e.target.parentNode.getAttribute("id");
+      let child = document.getElementById(a).childNodes;
+      var paperToDelete = child[0].value;
+      var papers = this.state.titleOfPaper;
+      var index = papers.indexOf(paperToDelete);
+      papers.splice(index, 1);
+      console.log(papers);
+      document.getElementById(a).remove();
+    };
+
     var inputPaper = document.createElement("input");
     inputPaper.type = "text";
     inputPaper.name = "titleOfPaper";
-    inputPaper.id = "titleOfPaper";
-    inputPaper.className = "form-control form-control-sm mt-2";
     inputPaper.placeholder = " ";
-    inputPaper.onChange = `${this.handleTitlePaper}`;
-    document.getElementById("addNewPaper").appendChild(inputPaper);
+    inputPaper.id = "titleOfPaper";
+    inputPaper.className = "form-control form-control-sm mt-2 col-10";
+    // inputPaper.onchange = `${this.handleTitlePaper}`;
+    inputPaper.onchange = (e) => {
+      e.preventDefault();
+      var joined = this.state.titleOfPaper;
+      joined.push(e.target.value);
+      console.log(joined);
+      this.setState({ titleOfPaper: joined });
+      // console.log(this.state.titleOfPaper);
+    };
+
+    document.getElementById("addNewPaper").appendChild(divPaper);
+    document.getElementById(`Div${this.state.count}`).appendChild(inputPaper);
+    document.getElementById(`Div${this.state.count}`).appendChild(removePaper);
+  };
+
+  removeNew = (e) => {};
+  handleTitlePaper = (event) => {
+    event.preventDefault();
+    console.log("erer");
+    var joined = this.state.titleOfPaper;
+    joined.push(event.target.value);
+    console.log(joined);
+    this.setState({ titleOfPaper: joined });
+    console.log(this.state.titleOfPaper);
   };
   handleChange(e) {
     if (e.target.name === "professionalStatus") {
@@ -219,12 +262,7 @@ class LifeMemberShipForm extends React.Component {
     this.setState({ messageSent: true });
     // console.log(this.state);
   };
-  handleTitlePaper = (event) => {
-    event.preventDefault();
-    var joined = this.state.titleOfPaper.concat(event.target.value);
-    console.log(joined);
-    this.setState({ titleOfPaper: joined });
-  };
+
   handleSubmit(e) {
     e.preventDefault();
     this.recaptcha.execute();
@@ -279,18 +317,18 @@ class LifeMemberShipForm extends React.Component {
     }
 
     console.log(data);
-    sendLifemembershipForm(data)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.status === "success") {
-          alert("Success " + response.data.message);
-          window.location.reload();
-        }
-      })
-      .catch((err) => {
-        alert(err);
-        console.log(err);
-      });
+    // sendLifemembershipForm(data)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data.status === "success") {
+    //       alert("Success " + response.data.message);
+    //       window.location.reload();
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     alert(err);
+    //     console.log(err);
+    //   });
   }
   render() {
     return (
@@ -707,6 +745,7 @@ class LifeMemberShipForm extends React.Component {
                   onChange={this.handleTitlePaper}
                   required
                 ></input>
+
                 <span className="Form__span">Title of Paper</span>
               </div>
               <button
