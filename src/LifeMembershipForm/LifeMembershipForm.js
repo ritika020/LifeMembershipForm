@@ -61,23 +61,22 @@ class LifeMemberShipForm extends React.Component {
       inService: false,
       researchWorker: false,
       count: 0,
+      selectYear:"2021",
+      selectMonth:"January"
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-<<<<<<< HEAD
+    this.range = this.range.bind(this);
     this.handleDobChange = this.handleDobChange.bind(this);
     this.handleRegDateChange = this.handleRegDateChange.bind(this);
   }
-
   handleDobChange(d){
-    this.setState({dob:d})
+    this.setState({dateOfBirth:d})
   }
 
   handleRegDateChange(d){
-    this.setState({dateReg:d})
-=======
+    this.setState({dateOfRegistration:d})
     // this.handleTitlePaper = this.handleTitlePaper.bind(this);
->>>>>>> ba12248c31745d83e9a730a210546d372bb1dc9b
   }
 
   addNew = (event) => {
@@ -332,18 +331,18 @@ class LifeMemberShipForm extends React.Component {
     }
 
     console.log(data);
-    // sendLifemembershipForm(data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       alert("Success " + response.data.message);
-    //       window.location.reload();
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     alert(err);
-    //     console.log(err);
-    //   });
+     sendLifemembershipForm(data)
+       .then((response) => {
+         console.log(response.data);
+         if (response.data.status === "success") {
+          alert("Success " + response.data.message);
+           window.location.reload();
+         }
+       })
+       .catch((err) => {
+         alert(err);
+         console.log(err);
+       });
   }
 
   range(start, end) {
@@ -357,7 +356,6 @@ class LifeMemberShipForm extends React.Component {
 
     var d = new Date();  
     const years = this.range(1940, 2021);
-    console.log("range",years)
     const months = [
       "January",
       "February",
@@ -390,175 +388,6 @@ class LifeMemberShipForm extends React.Component {
               </div>
             </div>
           </div>
-<<<<<<< HEAD
-        </div>
-        <form onSubmit={this.handleSubmit}>
-          <h4 className="Forms_title Forms_titleText mb-4">Personal details</h4>
-          <div className="form-row mb-3">
-            <div className=" col-md-2 col-12">
-              <input
-                name="firstName"
-                onChange={this.handleChange}
-                className="form-control"
-                type="text"
-                placeholder=" "
-                required
-              ></input>
-              <span className="Form__span">First Name</span>
-            </div>
-            <div className="col-md-2 col-12">
-              <input
-                name="middleName"
-                onChange={this.handleChange}
-                className="form-control"
-                type="text"
-                placeholder=" "
-                required
-              ></input>
-              <span className="Form__span">Middle Name</span>
-            </div>
-            <div className="col-md-2 col-12">
-              <input
-                name="lastName"
-                onChange={this.handleChange}
-                className="form-control"
-                type="text"
-                placeholder=" "
-                required
-              ></input>
-              <span className="Form__span">Last Name</span>
-            </div>
-            <div className="col-md-1 col-12">
-              <select
-                className="custom-select Form__select"
-                id="inlineFormCustomSelectPref"
-                name="gender"
-                onChange={this.handleChange}
-                required
-              >
-                <option value="" disabled selected>
-                  Gender
-                </option>
-                <option value="m">Male</option>
-                <option value="f">Female</option>
-                <option value="o">Others</option>
-              </select>
-            </div>
-            <div className="col-md-2 col-12 mt-2 mt-md-0">
-              {/* <input
-                required
-                type="date"
-                name="dob"
-                onChange={this.handleChange}
-                className="form-control"
-                placeholder=" "
-              />
-              <span className="Form__span">Date of birth</span> */}
-              <DatePicker
-                                renderCustomHeader={({
-                                    date,
-                                    changeYear,
-                                    changeMonth,
-                                    decreaseMonth,
-                                    increaseMonth,
-                                    prevMonthButtonDisabled,
-                                    nextMonthButtonDisabled
-                                }) => (
-                                    <div
-                                        style={{
-                                            margin: 10,
-                                            display: "flex",
-                                            justifyContent: "center"
-                                        }}
-                                    >
-                                        <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
-                                            {"<"}
-                                        </button>
-                                        <select
-                                            value={d.getYear(date)}
-                                            onChange={({ target: { value } }) => changeYear(value)}
-                                        >
-                                            {years.map(option => (
-                                                <option key={option} value={option}>
-                                                    {option}
-                                                </option>
-                                            ))}
-                                        </select>
-
-                                        <select
-                                            value={months[d.getMonth(date)]}
-                                            onChange={({ target: { value } }) =>
-                                                changeMonth(months.indexOf(value))
-                                            }
-                                        >
-                                            {months.map(option => (
-                                                <option key={option} value={option}>
-                                                    {option}
-                                                </option>
-                                            ))}
-                                        </select>
-
-                                        <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
-                                            {">"}
-                                        </button>
-                                    </div>
-                                )}
-                               
-                                selected={this.state.dob}
-                                onChange={this.handleDobChange}
-                                className="personalDOB"
-                                placeholderText="Date of Birth"
-                            > 
-                            </DatePicker>
-            </div>
-            <div className="col-md-1 col-12">
-              <select
-                className="custom-select Form__select"
-                id="inlineFormCustomSelectPref"
-                name="bloodGroup"
-                required
-                onChange={this.handleChange}
-              >
-                <option value="" disabled selected>
-                  Blood Group
-                </option>
-                <option value="m">A+</option>
-                <option value="f">A-</option>
-                <option value="o">B+</option>
-                <option value="m">B-</option>
-                <option value="f">AB+</option>
-                <option value="o">AB-</option>
-                <option value="o">O+</option>
-                <option value="o">O-</option>
-              </select>
-            </div>
-            <div className="col-md-2 col-12">
-              <input
-                name="altNum"
-                onChange={this.handleChange}
-                className="form-control"
-                type="text"
-                id="mobilenum"
-                placeholder=" "
-                min="0"
-                required
-              ></input>
-              <span className="Form__span">Alternate Number</span>
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="col-md-10 col-12">
-              <textarea
-                className="form-control"
-                name="resAdd"
-                onChange={this.handleChange}
-                id="exampleFormControlTextarea1"
-                placeholder=" "
-                rows="3"
-                required
-              ></textarea>
-              <span className="Form__span">Residential Address</span>
-=======
           <form onSubmit={this.handleSubmit}>
             <h4 className="Forms_title Forms_titleText mb-4">
               Personal details
@@ -623,7 +452,7 @@ class LifeMemberShipForm extends React.Component {
                 </select>
               </div>
               <div className="col-md-2 col-12 mt-2 mt-md-0">
-                <input
+                {/* <input
                   required
                   type="date"
                   name="dateOfBirth"
@@ -632,7 +461,69 @@ class LifeMemberShipForm extends React.Component {
                   className="form-control"
                   placeholder=" "
                 />
-                <span className="Form__span">Date of birth</span>
+                <span className="Form__span">Date of birth</span> */}
+                <DatePicker
+                                renderCustomHeader={({
+                                    date,
+                                    changeYear,
+                                    changeMonth,
+                                    decreaseMonth,
+                                    increaseMonth,
+                                    prevMonthButtonDisabled,
+                                    nextMonthButtonDisabled
+                                }) => (
+                                    <div
+                                        style={{
+                                            margin: 10,
+                                            display: "flex",
+                                            justifyContent: "center"
+                                        }}
+                                    >
+                                        <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+                                            {"<"}
+                                        </button>
+                                        <select
+                                            value={this.state.selectYear}
+                                            onChange={({ target: { value } }) => {
+                                            changeYear(value)
+                                            this.setState({selectYear:value})
+                                        }
+                                        }
+                                        >
+                                            {years.map(option => (
+                                                <option key={option} value={option}>
+                                                    {option}
+                                                </option>
+                                            ))}
+                                        </select>
+
+                                        <select
+                                            value={this.state.selectMonth}
+                                            onChange={({ target: { value } }) =>{
+                                                changeMonth(months.indexOf(value))
+                                                this.setState({selectMonth:value})
+                                            }
+                                            }
+                                        >
+                                            {months.map(option => (
+                                                <option key={option} value={option}>
+                                                    {option}
+                                                </option>
+                                            ))}
+                                        </select>
+
+                                        <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+                                            {">"}
+                                        </button>
+                                    </div>
+                                )}
+                               
+                                selected={this.state.dateOfBirth}
+                                onChange={this.handleDobChange}
+                                className="personalDOB"
+                                placeholderText="Date of Birth"
+                            > 
+                            </DatePicker>
               </div>
               <div className="col-md-1 col-12">
                 <select
@@ -670,7 +561,6 @@ class LifeMemberShipForm extends React.Component {
                 ></input>
                 <span className="Form__span">Number</span>
               </div>
->>>>>>> ba12248c31745d83e9a730a210546d372bb1dc9b
             </div>
             <div className="form-row">
               <div className="col-md-10 col-12">
@@ -748,33 +638,35 @@ class LifeMemberShipForm extends React.Component {
               </div>
             </div>
 
-<<<<<<< HEAD
-          <br />
-          <h5 className="Forms_titleText">Membership Details</h5>
-          <br />
-          <div className="form-row">
-            <div className="col-md-2 col-12">
-              <input
-                type="text"
-                name="regNum"
-                className="form-control form-control-sm"
-                placeholder=" "
-                onChange={this.handleChange}
-                required
-              ></input>
-              <span className="Form__span">Registration Number</span>
-            </div>
-            <div className="col-md-2 col-12 mt-2 mt-md-0">
-              {/* <input
-                type="date"
-                name="dateReg"
-                onChange={this.handleChange}
-                className="form-control"
-                placeholder=" "
-                required
-              />
-              <span className="Form__span">Date Of Registration</span> */}
-            <DatePicker
+            <br />
+            <h5 className="Forms_titleText">Membership Details</h5>
+            <br />
+            <div className="form-row">
+              <div className="col-md-2 col-12">
+                <input
+                  type="text"
+                  name="registrationNumber"
+                  id="registrationNumber"
+                  className="form-control form-control-sm"
+                  placeholder=" "
+                  onChange={this.handleChange}
+                  required
+                ></input>
+                <span className="Form__span">Registration Number</span>
+              </div>
+              <div className="col-md-2 col-12 mt-2 mt-md-0">
+                {/* <input
+                  type="date"
+                  name="dateOfRegistration"
+                  id="dateOfRegistration"
+                  onChange={this.handleChange}
+                  className="form-control"
+                  placeholder=" "
+                  required
+                />
+                <span className="Form__span">Date Of Registration</span> */}
+
+<DatePicker
                                 renderCustomHeader={({
                                     date,
                                     changeYear,
@@ -795,8 +687,12 @@ class LifeMemberShipForm extends React.Component {
                                             {"<"}
                                         </button>
                                         <select
-                                            value={d.getYear(date)}
-                                            onChange={({ target: { value } }) => changeYear(value)}
+                                            value={this.state.selectYear}
+                                            onChange={({ target: { value } }) => {
+                                            changeYear(value)
+                                            this.setState({selectYear:value})
+                                        }
+                                        }
                                         >
                                             {years.map(option => (
                                                 <option key={option} value={option}>
@@ -806,9 +702,11 @@ class LifeMemberShipForm extends React.Component {
                                         </select>
 
                                         <select
-                                            value={months[d.getMonth(date)]}
-                                            onChange={({ target: { value } }) =>
+                                            value={this.state.selectMonth}
+                                            onChange={({ target: { value } }) =>{
                                                 changeMonth(months.indexOf(value))
+                                                this.setState({selectMonth:value})
+                                            }
                                             }
                                         >
                                             {months.map(option => (
@@ -824,55 +722,13 @@ class LifeMemberShipForm extends React.Component {
                                     </div>
                                 )}
                                
-                                selected={this.state.dateReg}
+                                selected={this.state.dateOfRegistration}
                                 onChange={this.handleRegDateChange}
                                 className="personalDOB"
                                 placeholderText="Registration Date"
                             > 
                             </DatePicker>
-            </div>
-            <div className="col-md-5 col-12">
-              <input
-                type="text"
-                name="nameofBoard"
-                className="form-control form-control-sm"
-                placeholder=" "
-                onChange={this.handleChange}
-                required
-              >
-                {/* </input> */}
-              </input>
-              <span className="Form__span">
-                Name of the Board/Council of Registration
-              </span>
-=======
-            <br />
-            <h5 className="Forms_titleText">Membership Details</h5>
-            <br />
-            <div className="form-row">
-              <div className="col-md-2 col-12">
-                <input
-                  type="text"
-                  name="registrationNumber"
-                  id="registrationNumber"
-                  className="form-control form-control-sm"
-                  placeholder=" "
-                  onChange={this.handleChange}
-                  required
-                ></input>
-                <span className="Form__span">Registration Number</span>
-              </div>
-              <div className="col-md-2 col-12 mt-2 mt-md-0">
-                <input
-                  type="date"
-                  name="dateOfRegistration"
-                  id="dateOfRegistration"
-                  onChange={this.handleChange}
-                  className="form-control"
-                  placeholder=" "
-                  required
-                />
-                <span className="Form__span">Date Of Registration</span>
+
               </div>
               <div className="col-md-5 col-12">
                 <input
@@ -890,7 +746,6 @@ class LifeMemberShipForm extends React.Component {
                   Name of the Board/Council of Registration
                 </span>
               </div>
->>>>>>> ba12248c31745d83e9a730a210546d372bb1dc9b
             </div>
             <br />
             <h5 className="Forms_titleText">Professional Status</h5>
