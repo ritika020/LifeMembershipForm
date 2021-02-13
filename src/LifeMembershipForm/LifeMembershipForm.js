@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import "./LifeMembershipForm.css";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import RaisedButton from "material-ui/RaisedButton";
 import Recaptcha from 'react-google-invisible-recaptcha';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -42,7 +43,18 @@ class LifeMemberShipForm extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDobChange = this.handleDobChange.bind(this);
+    this.handleRegDateChange = this.handleRegDateChange.bind(this);
   }
+
+  handleDobChange(d){
+    this.setState({dob:d})
+  }
+
+  handleRegDateChange(d){
+    this.setState({dateReg:d})
+  }
+
   addNew = (event) => {
     event.preventDefault();
     var inputPaper = document.createElement("input");
@@ -123,7 +135,33 @@ class LifeMemberShipForm extends React.Component {
     }
     // console.log(this.state);
   }
+
+  range(start, end) {
+    var ans = [];
+    for (let i = start; i <= end; i++) {
+        ans.push(i);
+    }
+    return ans;
+}
   render() {
+
+    var d = new Date();  
+    const years = this.range(1940, 2021);
+    console.log("range",years)
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
     return (
       <MuiThemeProvider>
 
@@ -196,7 +234,7 @@ class LifeMemberShipForm extends React.Component {
               </select>
             </div>
             <div className="col-md-2 col-12 mt-2 mt-md-0">
-              <input
+              {/* <input
                 required
                 type="date"
                 name="dob"
@@ -204,7 +242,63 @@ class LifeMemberShipForm extends React.Component {
                 className="form-control"
                 placeholder=" "
               />
-              <span className="Form__span">Date of birth</span>
+              <span className="Form__span">Date of birth</span> */}
+              <DatePicker
+                                renderCustomHeader={({
+                                    date,
+                                    changeYear,
+                                    changeMonth,
+                                    decreaseMonth,
+                                    increaseMonth,
+                                    prevMonthButtonDisabled,
+                                    nextMonthButtonDisabled
+                                }) => (
+                                    <div
+                                        style={{
+                                            margin: 10,
+                                            display: "flex",
+                                            justifyContent: "center"
+                                        }}
+                                    >
+                                        <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+                                            {"<"}
+                                        </button>
+                                        <select
+                                            value={d.getYear(date)}
+                                            onChange={({ target: { value } }) => changeYear(value)}
+                                        >
+                                            {years.map(option => (
+                                                <option key={option} value={option}>
+                                                    {option}
+                                                </option>
+                                            ))}
+                                        </select>
+
+                                        <select
+                                            value={months[d.getMonth(date)]}
+                                            onChange={({ target: { value } }) =>
+                                                changeMonth(months.indexOf(value))
+                                            }
+                                        >
+                                            {months.map(option => (
+                                                <option key={option} value={option}>
+                                                    {option}
+                                                </option>
+                                            ))}
+                                        </select>
+
+                                        <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+                                            {">"}
+                                        </button>
+                                    </div>
+                                )}
+                               
+                                selected={this.state.dob}
+                                onChange={this.handleDobChange}
+                                className="personalDOB"
+                                placeholderText="Date of Birth"
+                            > 
+                            </DatePicker>
             </div>
             <div className="col-md-1 col-12">
               <select
@@ -324,7 +418,7 @@ class LifeMemberShipForm extends React.Component {
               <span className="Form__span">Registration Number</span>
             </div>
             <div className="col-md-2 col-12 mt-2 mt-md-0">
-              <input
+              {/* <input
                 type="date"
                 name="dateReg"
                 onChange={this.handleChange}
@@ -332,7 +426,63 @@ class LifeMemberShipForm extends React.Component {
                 placeholder=" "
                 required
               />
-              <span className="Form__span">Date Of Registration</span>
+              <span className="Form__span">Date Of Registration</span> */}
+            <DatePicker
+                                renderCustomHeader={({
+                                    date,
+                                    changeYear,
+                                    changeMonth,
+                                    decreaseMonth,
+                                    increaseMonth,
+                                    prevMonthButtonDisabled,
+                                    nextMonthButtonDisabled
+                                }) => (
+                                    <div
+                                        style={{
+                                            margin: 10,
+                                            display: "flex",
+                                            justifyContent: "center"
+                                        }}
+                                    >
+                                        <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+                                            {"<"}
+                                        </button>
+                                        <select
+                                            value={d.getYear(date)}
+                                            onChange={({ target: { value } }) => changeYear(value)}
+                                        >
+                                            {years.map(option => (
+                                                <option key={option} value={option}>
+                                                    {option}
+                                                </option>
+                                            ))}
+                                        </select>
+
+                                        <select
+                                            value={months[d.getMonth(date)]}
+                                            onChange={({ target: { value } }) =>
+                                                changeMonth(months.indexOf(value))
+                                            }
+                                        >
+                                            {months.map(option => (
+                                                <option key={option} value={option}>
+                                                    {option}
+                                                </option>
+                                            ))}
+                                        </select>
+
+                                        <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+                                            {">"}
+                                        </button>
+                                    </div>
+                                )}
+                               
+                                selected={this.state.dateReg}
+                                onChange={this.handleRegDateChange}
+                                className="personalDOB"
+                                placeholderText="Registration Date"
+                            > 
+                            </DatePicker>
             </div>
             <div className="col-md-5 col-12">
               <input
