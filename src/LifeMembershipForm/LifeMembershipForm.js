@@ -26,7 +26,7 @@ class LifeMemberShipForm extends React.Component {
       yearOfPassing: "",
       registrationNumber: "",
       dateOfRegistration: "",
-      nameofBoard: "",
+      nameOfBoard: "",
       professionalStatus: {
         practitioner: {
           hospitalAttached: "",
@@ -74,7 +74,7 @@ class LifeMemberShipForm extends React.Component {
     divPaper.className = "row ml-2";
     var removePaper = document.createElement("button");
     removePaper.className = "col-1 ml-2";
-    removePaper.text = <MdCancel />;
+    removePaper.text = "Remove";
     removePaper.type = "button";
     // removePaper;
     removePaper.onclick = (e) => {
@@ -98,10 +98,10 @@ class LifeMemberShipForm extends React.Component {
     // inputPaper.onchange = `${this.handleTitlePaper}`;
     inputPaper.onchange = (e) => {
       e.preventDefault();
-      var joined = this.state.titleOfPaper;
-      joined.push(e.target.value);
-      console.log(joined);
-      this.setState({ titleOfPaper: joined });
+      // var joined = this.state.titleOfPaper;
+      // joined.push(e.target.value);
+      // console.log(joined);
+      // this.setState({ titleOfPaper: joined });
       // console.log(this.state.titleOfPaper);
     };
 
@@ -113,12 +113,12 @@ class LifeMemberShipForm extends React.Component {
   removeNew = (e) => {};
   handleTitlePaper = (event) => {
     event.preventDefault();
-    console.log("erer");
-    var joined = this.state.titleOfPaper;
-    joined.push(event.target.value);
-    console.log(joined);
-    this.setState({ titleOfPaper: joined });
-    console.log(this.state.titleOfPaper);
+    // console.log("erer");
+    // var joined = this.state.titleOfPaper;
+    // joined.push(event.target.value);
+    // console.log(joined);
+    // this.setState({ titleOfPaper: joined });
+    // console.log(this.state.titleOfPaper);
   };
   handleChange(e) {
     if (e.target.name === "professionalStatus") {
@@ -265,9 +265,21 @@ class LifeMemberShipForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.recaptcha.execute();
+    // this.recaptcha.execute();
     console.log(this.state);
     var formData = new FormData(e.target);
+    var divPapersFirst = document.getElementById("titleOfPaper");
+    var joined = this.state.titleOfPaper;
+    joined.push(divPapersFirst.value);
+    // console.log(divPapersFirst.value);
+    var divPapers = document.getElementById("addNewPaper").childNodes;
+    // console.log(divPapers);
+    for (let i = 0; i < divPapers.length; i++) {
+      let childnodes = divPapers[i].childNodes;
+      // console.log(childnodes[0].value);
+      joined.push(childnodes[0].value);
+    }
+    console.log(joined);
     const data = {};
     data["firstName"] = formData.get("firstName") || this.state.firstName;
     data["middleName"] = formData.get("middleName") || this.state.middleName;
@@ -313,22 +325,23 @@ class LifeMemberShipForm extends React.Component {
     }
     let paperPub = formData.get("paperPublished") || this.state.paperPublished;
     if (paperPub === "y") {
-      data["titleOfPaper"] = this.state.titleOfPaper;
+      // data["titleOfPaper"] = this.state.titleOfPaper;
+      data["titleOfPaper"] = joined;
     }
 
-    console.log(data);
-    // sendLifemembershipForm(data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       alert("Success " + response.data.message);
-    //       window.location.reload();
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     alert(err);
-    //     console.log(err);
-    //   });
+    console.log(data.titleOfPaper);
+    sendLifemembershipForm(data)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === "success") {
+          alert("Success " + response.data.message);
+          // window.location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(err);
+        console.log(err);
+      });
   }
   render() {
     return (
@@ -740,6 +753,7 @@ class LifeMemberShipForm extends React.Component {
                 <input
                   type="text"
                   name="titleOfPaper"
+                  id="titleOfPaper"
                   className="form-control form-control-sm"
                   placeholder=" "
                   onChange={this.handleTitlePaper}
@@ -815,7 +829,11 @@ class LifeMemberShipForm extends React.Component {
                 <div className="col text-center">
                   <button className="button button1">View form</button>
 
-                  <button className="button button2" type="submit">
+                  <button
+                    className="button button2"
+                    type="submit"
+                    // onClick={this.handleSubmit}
+                  >
                     Submit form
                   </button>
                 </div>
