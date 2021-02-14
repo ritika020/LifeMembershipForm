@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import "./LifeMembershipForm.css";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import RaisedButton from "material-ui/RaisedButton";
 import Recaptcha from "react-google-invisible-recaptcha";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
@@ -60,11 +61,24 @@ class LifeMemberShipForm extends React.Component {
       inService: false,
       researchWorker: false,
       count: 0,
+      selectYear: "2021",
+      selectMonth: "January",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.range = this.range.bind(this);
+    this.handleDobChange = this.handleDobChange.bind(this);
+    this.handleRegDateChange = this.handleRegDateChange.bind(this);
+  }
+  handleDobChange(d) {
+    this.setState({ dateOfBirth: d });
+  }
+
+  handleRegDateChange(d) {
+    this.setState({ dateOfRegistration: d });
     // this.handleTitlePaper = this.handleTitlePaper.bind(this);
   }
+
   addNew = (event) => {
     event.preventDefault();
     this.setState({ count: this.state.count + 1 });
@@ -280,6 +294,9 @@ class LifeMemberShipForm extends React.Component {
       joined.push(childnodes[0].value);
     }
     console.log(joined);
+    this.setState({
+      titleOfPaper: joined,
+    });
     const data = {};
     data["firstName"] = formData.get("firstName") || this.state.firstName;
     data["middleName"] = formData.get("middleName") || this.state.middleName;
@@ -325,11 +342,11 @@ class LifeMemberShipForm extends React.Component {
     }
     let paperPub = formData.get("paperPublished") || this.state.paperPublished;
     if (paperPub === "y") {
-      // data["titleOfPaper"] = this.state.titleOfPaper;
-      data["titleOfPaper"] = joined;
+      data["titleOfPaper"] = this.state.titleOfPaper;
+      // data["titleOfPaper"] = joined;
     }
 
-    console.log(data.titleOfPaper);
+    console.log(data);
     sendLifemembershipForm(data)
       .then((response) => {
         console.log(response.data);
@@ -343,7 +360,31 @@ class LifeMemberShipForm extends React.Component {
         console.log(err);
       });
   }
+
+  range(start, end) {
+    var ans = [];
+    for (let i = start; i <= end; i++) {
+      ans.push(i);
+    }
+    return ans;
+  }
   render() {
+    var d = new Date();
+    const years = this.range(1940, 2021);
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
     return (
       <MuiThemeProvider>
         <div className="Forms_first mr-5 ml-5 mb-5">
@@ -426,7 +467,7 @@ class LifeMemberShipForm extends React.Component {
                 </select>
               </div>
               <div className="col-md-2 col-12 mt-2 mt-md-0">
-                <input
+                {/* <input
                   required
                   type="date"
                   name="dateOfBirth"
@@ -435,7 +476,71 @@ class LifeMemberShipForm extends React.Component {
                   className="form-control"
                   placeholder=" "
                 />
-                <span className="Form__span">Date of birth</span>
+                <span className="Form__span">Date of birth</span> */}
+                <DatePicker
+                  renderCustomHeader={({
+                    date,
+                    changeYear,
+                    changeMonth,
+                    decreaseMonth,
+                    increaseMonth,
+                    prevMonthButtonDisabled,
+                    nextMonthButtonDisabled,
+                  }) => (
+                    <div
+                      style={{
+                        margin: 10,
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <button
+                        onClick={decreaseMonth}
+                        disabled={prevMonthButtonDisabled}
+                      >
+                        {"<"}
+                      </button>
+                      <select
+                        value={this.state.selectYear}
+                        onChange={({ target: { value } }) => {
+                          changeYear(value);
+                          this.setState({ selectYear: value });
+                        }}
+                      >
+                        {years.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+
+                      <select
+                        value={this.state.selectMonth}
+                        onChange={({ target: { value } }) => {
+                          changeMonth(months.indexOf(value));
+                          this.setState({ selectMonth: value });
+                        }}
+                      >
+                        {months.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+
+                      <button
+                        onClick={increaseMonth}
+                        disabled={nextMonthButtonDisabled}
+                      >
+                        {">"}
+                      </button>
+                    </div>
+                  )}
+                  selected={this.state.dateOfBirth}
+                  onChange={this.handleDobChange}
+                  className="personalDOB"
+                  placeholderText="Date of Birth"
+                ></DatePicker>
               </div>
               <div className="col-md-1 col-12">
                 <select
@@ -567,7 +672,7 @@ class LifeMemberShipForm extends React.Component {
                 <span className="Form__span">Registration Number</span>
               </div>
               <div className="col-md-2 col-12 mt-2 mt-md-0">
-                <input
+                {/* <input
                   type="date"
                   name="dateOfRegistration"
                   id="dateOfRegistration"
@@ -576,7 +681,72 @@ class LifeMemberShipForm extends React.Component {
                   placeholder=" "
                   required
                 />
-                <span className="Form__span">Date Of Registration</span>
+                <span className="Form__span">Date Of Registration</span> */}
+
+                <DatePicker
+                  renderCustomHeader={({
+                    date,
+                    changeYear,
+                    changeMonth,
+                    decreaseMonth,
+                    increaseMonth,
+                    prevMonthButtonDisabled,
+                    nextMonthButtonDisabled,
+                  }) => (
+                    <div
+                      style={{
+                        margin: 10,
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <button
+                        onClick={decreaseMonth}
+                        disabled={prevMonthButtonDisabled}
+                      >
+                        {"<"}
+                      </button>
+                      <select
+                        value={this.state.selectYear}
+                        onChange={({ target: { value } }) => {
+                          changeYear(value);
+                          this.setState({ selectYear: value });
+                        }}
+                      >
+                        {years.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+
+                      <select
+                        value={this.state.selectMonth}
+                        onChange={({ target: { value } }) => {
+                          changeMonth(months.indexOf(value));
+                          this.setState({ selectMonth: value });
+                        }}
+                      >
+                        {months.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+
+                      <button
+                        onClick={increaseMonth}
+                        disabled={nextMonthButtonDisabled}
+                      >
+                        {">"}
+                      </button>
+                    </div>
+                  )}
+                  selected={this.state.dateOfRegistration}
+                  onChange={this.handleRegDateChange}
+                  className="personalDOB"
+                  placeholderText="Registration Date"
+                ></DatePicker>
               </div>
               <div className="col-md-5 col-12">
                 <input
