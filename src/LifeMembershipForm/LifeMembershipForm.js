@@ -86,10 +86,10 @@ class LifeMemberShipForm extends React.Component {
     var divPaper = document.createElement("div");
     divPaper.id = `Div${this.state.count}`;
     divPaper.className = "row ml-2";
-    var removePaper = document.createElement("button");
-    removePaper.className = "col-1 ml-2";
-    removePaper.text = "Remove";
-    removePaper.type = "button";
+    var removePaper = document.createElement("p");
+    removePaper.className = "col-1 ml-2 paperInput";
+    removePaper.innerHTML = "Remove";
+    // removePaper.type = "button";
     // removePaper;
     removePaper.onclick = (e) => {
       e.preventDefault();
@@ -352,7 +352,7 @@ class LifeMemberShipForm extends React.Component {
         console.log(response.data);
         if (response.data.status === "success") {
           alert("Success " + response.data.message);
-          // window.location.reload();
+          window.location.reload();
         }
       })
       .catch((err) => {
