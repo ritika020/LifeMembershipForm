@@ -63,6 +63,7 @@ class LifeMemberShipForm extends React.Component {
       count: 0,
       selectYear: "2021",
       selectMonth: "January",
+      clinicAddress:""          //this is yet to be handled on submission
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -1036,7 +1037,7 @@ class LifeMemberShipForm extends React.Component {
               onResolved={this.onResolved}
             /> */}
           </form> 
-        </div>
+          </div>
       </MuiThemeProvider>
     );
   }
