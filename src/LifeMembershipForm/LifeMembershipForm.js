@@ -1030,12 +1030,12 @@ class LifeMemberShipForm extends React.Component {
               style={StyleSheet.button}
               onClick={this.sendMessage}
             /> */}
-            <Recaptcha
+            {/* {/* <Recaptcha
               ref={(ref) => (this.recaptcha = ref)}
               sitekey="6LdV_00aAAAAAOhy0wsKIR1yCyOcOWK-7-X0J0zQ"
               onResolved={this.onResolved}
-            />
-          </form>
+            /> */}
+          </form> 
         </div>
       </MuiThemeProvider>
     );
