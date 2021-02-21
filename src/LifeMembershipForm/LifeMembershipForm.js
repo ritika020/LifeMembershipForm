@@ -614,6 +614,22 @@ class LifeMemberShipForm extends React.Component {
             <h5 className="Forms_titleText">Qualification Details</h5>
             <br />
             <div className="form-row">
+            <div className="col-md-10 col-12">
+                <textarea
+                  className="form-control"
+                  name="clinicAddress"
+                  id="clinicAddress"
+                  onChange={this.handleChange}
+                  placeholder=" "
+                  rows="3"
+                  style={{"marginBottom":"20px"}}
+                  required
+                ></textarea>
+                <span className="Form__span">Clinic Address</span>
+              </div>
+              </div>
+              <div className="form-row">
+              <br/>
               <div className="col-md-5 col-12">
                 <input
                   type="text"
